@@ -7,10 +7,9 @@ setup(
     author='Sean Connolly-Boutin',
     author_email='sean.connolly.boutin@gmail.com',
     # Needed to actually package something
-    packages=['measure'],
+    packages=['CompressibleFlowFunctions'],
     # Needed for dependencies
-    install_requires=['numpy'],
-    install_requires=['scipy'],
+    install_requires=['numpy','scipy'],
 
     # *strongly* suggested for sharing
     version='0.1',
