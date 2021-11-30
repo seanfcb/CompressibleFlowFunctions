@@ -10,7 +10,6 @@ setup(
     packages=['measure'],
     # Needed for dependencies
     install_requires=['numpy'],
-    install_requires=['scipy'],
 
     # *strongly* suggested for sharing
     version='0.1',
