@@ -40,13 +40,13 @@ def fanno_losses_backwards(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,L): #function to 
     return M1, Po1, P1, Po2, P2, Lstar1, Lstar2
 
 
-# def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the deltrol equation
-#     P_bval  = newton(flowrates_backwards,P1, args=(P1,Cv,SG,Q))
-#     if P_bval > 2*P1:
-#         P_bval = flowrates_choked(Cv,SG,Q)
-#     M_bval  = bisect(delta_mass_static,0.0000001,0.99999999,args=(mdot,P_bval*101325/14.7,Rs,To,gamma,Apipe))
-#     Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
-#     return P_bval, Po_bval, M_bval
+def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the deltrol equation
+    P_bval  = newton(flowrates_backwards,P1, args=(P1,Cv,SG,Q))
+    if P_bval > 2*P1:
+        P_bval = flowrates_choked(Cv,SG,Q)
+    M_bval  = bisect(delta_mass_static,0.0000001,0.99999999,args=(mdot,P_bval*101325/14.7,Rs,To,gamma,Apipe))
+    Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
+    return P_bval, Po_bval, M_bval
 
 # def valve_losses_backwards(P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the Swagelok equation
 #     '''
