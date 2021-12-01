@@ -33,6 +33,17 @@ def flowrates_choked(Cv,SG,Q):
     # conv = 60*0.471*22.67*np.sqrt(5/9)
     # return Q*np.sqrt(SG*T1)/(conv*Cv)
 
+def flowrates_backwards(P1,P2,Cv,SG,Q):
+    '''
+    Function simply wraps the flowrates() function to iterate on inlet pressure. Returns inlet pressure
+    Expected inputs:
+    P1 and P2: Pressures upstream and downstream, PSI
+    Cv       : Flow coefficient
+    SG       : Specific gravity w.r.t. air
+    Q        : Volumetric flow rate, SCFH (see mdot_to_scfh)
+    '''
+    return flowrates(P2,P1,Cv,SG,Q)
+
 def mdot_to_scfh(mdot,Rs,G):
     '''
     Function calculates the volumetric flow rate in standard cubic feet per hour (scfh) of Nitrogen.
