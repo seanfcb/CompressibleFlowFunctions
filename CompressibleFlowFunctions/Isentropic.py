@@ -138,8 +138,20 @@ def p_from_pratio(Po,gamma,M):
     gamma    : Ratio of specific heats
     M        : Mach number
     '''
+    Po = P_static/(1+((gamma-1)/2)*M**2)**(-(gamma)/(gamma-1))
+    return Po
+
+def po_from_pratio(P,gamma,M):
+    '''
+    Function calculates the static pressure knowing the gas properties, Mach number, and stagnation pressure using the isentropic pressure ratio equation P/Po
+    Expected inputs:
+    Po       : Stagnation pressure, any units can be used. Static pressure will be returned in the same units provided for stagnation pressure
+    gamma    : Ratio of specific heats
+    M        : Mach number
+    '''
     P_static = Po*(1+((gamma-1)/2)*M**2)**(-(gamma)/(gamma-1))
     return P_static
+
 
 def T_from_Tratio(To,gamma,M):
     '''
