@@ -20,6 +20,19 @@ def flowrates(P2,P1,Cv,SG,Q):
     # delP = P1-P2
     # return Q - conv*Cv*(1-(2/3)*delP/P1)*np.sqrt(delP/(P1*SG*T1))
 
+def flowrates_swagelok(T1,P2,P1,Cv,SG,Q):
+    '''
+    Calculates the static pressure drop through a flow device rated by Cv
+    Expected inputs:
+    P1 and P2: Pressures upstream and downstream, PSI
+    Cv       : Flow coefficient
+    SG       : Specific gravity w.r.t. air
+    Q        : Volumetric flow rate, SCFH (see mdot_to_scfh)
+    '''
+    conv = 60*22.67*np.sqrt(5/9)#conversion constant
+    delP = P1-P2
+    return Q - conv*Cv*(1-(2/3)*delP/P1)*np.sqrt(delP/(P1*SG*T1))
+
 def flowrates_choked(Cv,SG,Q):
     '''
     Calculates the static pressure drop through a flow device rated by Cv
