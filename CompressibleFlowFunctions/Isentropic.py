@@ -138,7 +138,7 @@ def po_from_pratio(P,gamma,M):
     gamma    : Ratio of specific heats
     M        : Mach number
     '''
-    Po = P_static/(1+((gamma-1)/2)*M**2)**(-(gamma)/(gamma-1))
+    Po = P/(1+((gamma-1)/2)*M**2)**(-(gamma)/(gamma-1))
     return Po
 
 def p_from_pratio(Po,gamma,M):
