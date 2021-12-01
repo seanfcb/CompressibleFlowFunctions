@@ -62,7 +62,8 @@ def valve_losses_backwards(P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the Sw
         Po1b = newton(delmass,Po1a,args=(M1,mdot,Rs,To,gamma,Apipe))
         return Po1a - Po1b
 
-        P_bval = newton(find_P_bval, (P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe))
+    P_bval = newton(find_P_bval, (P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe))
+
     return P_bval#, Po_bval, M_bval
 
 
