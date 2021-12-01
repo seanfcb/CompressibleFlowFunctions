@@ -40,33 +40,30 @@ def fanno_losses_backwards(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,L): #function to 
     return M1, Po1, P1, Po2, P2, Lstar1, Lstar2
 
 
-def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
-    P_bval  = newton(flowrates_backwards,P1, args=(P1,Cv,SG,Q))
-    if P_bval > 2*P1:
-        P_bval = flowrates_choked(Cv,SG,Q)
-    M_bval  = bisect(delta_mass_static,0.0000001,0.99999999,args=(mdot,P_bval*101325/14.7,Rs,To,gamma,Apipe))
-    Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
-
-
-    # def vlb(T1,P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
-    #     M  = bisect(mach_from_Tratio,0.00001,0.99999999,args=(To,T1,gamma))
-    #     print(M)
-    #     P_bval  = bisect(flowrates_backwards,0.1,10000, args=(P1,Cv,SG,Q,T1))
-    #     if P_bval > 2*P1:
-    #         P_bval = flowrates_choked(Cv,SG,Q)
-    #     M_bval  = newton(delta_mass_static,0.5,args=(mdot,P_bval*101325/14.7,Rs,To,gamma,Apipe))
-    #     Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
-    #     return M-M_bval
-    #
-    # T_bval = newton(vlb, 0.85*To, args=(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe))
-    # M_bval = bisect(mach_from_Tratio,0.01,0.99999,args=(To,T_bval,gamma))
-    # P_bval = bisect(flowrates_backwards,0.1,10000, args=(P1,Cv,SG,Q,T_bval))
-    # Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
-    return P_bval, Po_bval, M_bval
-
-# def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
-#
+# def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the deltrol equation
+#     P_bval  = newton(flowrates_backwards,P1, args=(P1,Cv,SG,Q))
+#     if P_bval > 2*P1:
+#         P_bval = flowrates_choked(Cv,SG,Q)
+#     M_bval  = bisect(delta_mass_static,0.0000001,0.99999999,args=(mdot,P_bval*101325/14.7,Rs,To,gamma,Apipe))
+#     Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
 #     return P_bval, Po_bval, M_bval
+
+def valve_losses_backwards(P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the Swagelok equation
+    '''
+    Does this display anything
+
+    '''
+    def delmass(Po,M,mdot,Rs,To,gamma,A):
+        return delta_mass_stag(M,mdot,Po,Rs,To,gamma,A)
+    def find_P_bval(P1,P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
+        T1   = newton(flowrates_swagelok,To-10,args=(P2,P1,Cv,SG,Q))
+        M1   = newton(mach_from_Tratio,0.2,args=(To,T1,gamma))
+        Po1a = po_from_pratio(P1,gamma,M1)
+        Po1b = newton(delmass,Po1a,args=(M1,mdot,Rs,To,gamma,Apipe))
+        return Po1a - Po1b
+
+        P_bval = newton(find_P_bval, (P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe))
+    return P_bval#, Po_bval, M_bval
 
 
 def fanning_and_reynolds(Po1,To,gamma,M,Rs,Dpipe,mu,epsilon):

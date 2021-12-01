@@ -130,7 +130,7 @@ def aratio_from_mach(M,gamma):
     Aratio = ((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1)))*(1+(gamma-1)/2*M*M)**((gamma+1)/(2*(gamma-1)))/M
     return Aratio
 
-def p_from_pratio(Po,gamma,M):
+def po_from_pratio(P,gamma,M):
     '''
     Function calculates the static pressure knowing the gas properties, Mach number, and stagnation pressure using the isentropic pressure ratio equation P/Po
     Expected inputs:
@@ -141,7 +141,7 @@ def p_from_pratio(Po,gamma,M):
     Po = P_static/(1+((gamma-1)/2)*M**2)**(-(gamma)/(gamma-1))
     return Po
 
-def po_from_pratio(P,gamma,M):
+def p_from_pratio(Po,gamma,M):
     '''
     Function calculates the static pressure knowing the gas properties, Mach number, and stagnation pressure using the isentropic pressure ratio equation P/Po
     Expected inputs:
