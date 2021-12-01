@@ -59,10 +59,10 @@ def valve_losses_backwards(P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the Sw
         T1   = newton(flowrates_swagelok,To-10,args=(P2,P1,Cv,SG,Q))
         M1   = newton(mach_from_Tratio,0.2,args=(To,T1,gamma))
         Po1a = po_from_pratio(P1,gamma,M1)
-        Po1b = newton(delmass,Po1a,args=(M1,mdot,Rs,To,gamma,Apipe))
+        Po1b = newton(delmass,Po1a*101325/14.7,args=(M1,mdot,Rs,To,gamma,Apipe))
         return Po1a - Po1b
 
-    P_bval = newton(find_P_bval, (P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe))
+    P_bval = newton(find_P_bval,P2+10,args=(P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe))
 
     return P_bval#, Po_bval, M_bval
 
