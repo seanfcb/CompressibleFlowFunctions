@@ -39,16 +39,6 @@ def fanno_losses_backwards(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,L): #function to 
 
     return M1, Po1, P1, Po2, P2, Lstar1, Lstar2
 
-def flowrates_backwards(P1,P2,Cv,SG,Q):
-    '''
-    Function simply wraps the flowrates() function to iterate on inlet pressure. Returns inlet pressure
-    Expected inputs:
-    P1 and P2: Pressures upstream and downstream, PSI
-    Cv       : Flow coefficient
-    SG       : Specific gravity w.r.t. air
-    Q        : Volumetric flow rate, SCFH (see mdot_to_scfh)
-    '''
-    return flowrates(P2,P1,Cv,SG,Q)
 
 def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
     P_bval  = newton(flowrates_backwards,P1, args=(P1,Cv,SG,Q))
@@ -73,6 +63,11 @@ def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
     # P_bval = bisect(flowrates_backwards,0.1,10000, args=(P1,Cv,SG,Q,T_bval))
     # Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
     return P_bval, Po_bval, M_bval
+
+# def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe):
+#
+#     return P_bval, Po_bval, M_bval
+
 
 def fanning_and_reynolds(Po1,To,gamma,M,Rs,Dpipe,mu,epsilon):
     P1         = p_from_pratio(Po1,gamma,M)
