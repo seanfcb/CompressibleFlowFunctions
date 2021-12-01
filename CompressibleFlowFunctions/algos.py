@@ -1,6 +1,11 @@
 import numpy as np
 import sys
 from scipy.optimize import *
+from CompressibleFlowFunctions.Isentropic import *
+from CompressibleFlowFunctions.Fanno import *
+from CompressibleFlowFunctions.NSW import *
+from CompressibleFlowFunctions.misc import *
+
 
 ###All functions take as an input: pressure in PSI, Temperature in Kelvin, Pipe diameters in inches
 ###All functions output answers in SI units
