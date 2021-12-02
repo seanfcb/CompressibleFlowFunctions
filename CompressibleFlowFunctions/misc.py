@@ -86,7 +86,7 @@ def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
     species = specs[0] #should be either fuel or oxidizer
     dia     = specs[1]*0.0254 #Diameter used for choking calculations. Convert in to m
     alpha   = specs[2]*np.pi/180 #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
-    Astar1  = area_from_mass(Po,To,Rs,gamma,mdot/1000)
+    Astar1  = area_from_mass(Po*101325/14.7,To,Rs,gamma,mdot/1000)
     if species == "oxidizer":
         Astar2 = np.pi*(dia+0.5*t*np.sin(np.pi/2-alpha))
     elif species == "fuel":
