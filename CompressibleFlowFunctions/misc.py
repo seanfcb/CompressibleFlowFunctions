@@ -81,18 +81,6 @@ def hole_numbers(Dhole,Astar):
     numholes = 4*Astar/np.pi/Dhole/Dhole
     return numholes
 
-def colebrook_white(f,Re,D,epsilon):
-    '''
-    Subtracts both sides of the Colebrook-White equation to calculate the Darcy friction factor.
-    Divide the result by 4 for the Fanning friction factor.
-    Expected inputs:
-    f       : Darcy friction factor
-    Re      : Reynolds Number
-    D       : Pipe diameter
-    epsilon : Surface roughness in micrometers
-    '''
-    return 1/np.sqrt(f) - (-2)*np.log10(epsilon/(3.7*D) + 2.51/(Re*np.sqrt(f)))
-
 def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
     species = specs[0] #should be either fuel or oxidizer
     dia     = specs[1]*0.0254 #Diameter used for choking calculations. Convert in to m
