@@ -97,4 +97,5 @@ def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
         Astar2 = np.pi*(dia-0.5*t*np.sin(np.pi/2-alpha))
     else:
         sys.exit("Species type invalid. \n Please check input file and ensure the first element of the specs array is properly set. \n Should be either oxidizer or fuel.")
+    print(Astar1,Astar2,t)
     return Astar1 - Astar2
