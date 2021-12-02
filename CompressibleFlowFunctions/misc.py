@@ -82,7 +82,7 @@ def hole_numbers(Dhole,Astar):
     return numholes
 
 def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
-    from CompressibleFlowFunctions.Isentropic import area_from_mass
+    from CompressibleFlowFunctions.Isentropic import delta_mass_stag
     def delmass(A,M,mdot,Po,Rs,To,gamma):
         return delta_mass_stag(M,mdot,Po,Rs,To,gamma,A)
 
