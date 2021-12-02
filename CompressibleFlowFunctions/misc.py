@@ -82,6 +82,7 @@ def hole_numbers(Dhole,Astar):
     return numholes
 
 def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
+    from CompressibleFlowFunctions.Isentropic import area_from_mass
     species = specs[0] #should be either fuel or oxidizer
     dia     = specs[1]*0.0254 #Diameter used for choking calculations. Convert in to m
     alpha   = specs[2]*np.pi/180 #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
