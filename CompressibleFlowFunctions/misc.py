@@ -2,7 +2,7 @@ import numpy as np
 import sys
 from scipy.optimize import *
 from CompressibleFlowFunctions.algos import *
-from Isentropic import *
+from CompressibleFlowFunctions.Isentropic import *
 from CompressibleFlowFunctions.Fanno import *
 from CompressibleFlowFunctions.NSW import *
 
