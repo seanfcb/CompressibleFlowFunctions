@@ -1,5 +1,7 @@
 from setuptools import setup
 
+setups = ['setuptools']
+
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
     name='CompressibleFlowFunctions',
@@ -11,10 +13,12 @@ setup(
     # Needed for dependencies
     install_requires=['numpy','scipy'],
 
+    setup_requires=setups
+
     # *strongly* suggested for sharing
     version='0.6',
     # The license can be anything you like
-    license='MIT',
+    #license='MIT',
     description='A package containing various functions in compressible flow',
     # We will also need a readme eventually (there will be a warning)
     # long_description=open('README.txt').read(),
