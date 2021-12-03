@@ -81,20 +81,20 @@ def hole_numbers(Dhole,Astar):
     numholes = 4*Astar/np.pi/Dhole/Dhole
     return numholes
 
-# def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
-#     from CompressibleFlowFunctions.Isentropic import delta_mass_stag
-#     def delmass(A,M,mdot,Po,Rs,To,gamma):
-#         return delta_mass_stag(M,mdot,Po,Rs,To,gamma,A)
-#
-#     species = specs[0] #should be either fuel or oxidizer
-#     dia     = specs[1] #Diameter used for choking calculations. Convert in to m
-#     alpha   = specs[2] #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
-#     Astar1  = newton(delmass,0.001,args=(1,mdot,Po,Rs,To,gamma))
-#     #Astar1  = area_from_mass(Po*101325/14.7,To,Rs,gamma,mdot/1000)
-#     if species == "oxidizer":
-#         Astar2 = np.pi*(dia+0.5*t*np.sin(np.pi/2-alpha))*t*np.sin(alpha)
-#     elif species == "fuel":
-#         Astar2 = np.pi*(dia-0.5*t*np.sin(np.pi/2-alpha))*t*np.sin(alpha)
-#     else:
-#         sys.exit("Species type invalid. \n Please check input file and ensure the first element of the specs array is properly set. \n Should be either oxidizer or fuel.")
-#     return Astar1-Astar2
+def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
+    from CompressibleFlowFunctions.Isentropic import delta_mass_stag
+    def delmass(A,M,mdot,Po,Rs,To,gamma):
+        return delta_mass_stag(M,mdot,Po,Rs,To,gamma,A)
+
+    species = specs[0] #should be either fuel or oxidizer
+    dia     = specs[1] #Diameter used for choking calculations. Convert in to m
+    alpha   = specs[2] #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
+    Astar1  = newton(delmass,0.001,args=(1,mdot,Po,Rs,To,gamma))
+    #Astar1  = area_from_mass(Po*101325/14.7,To,Rs,gamma,mdot/1000)
+    if species == "oxidizer":
+        Astar2 = np.pi*(dia+0.5*t*np.sin(np.pi/2-alpha))*t*np.sin(alpha)
+    elif species == "fuel":
+        Astar2 = np.pi*(dia-0.5*t*np.sin(np.pi/2-alpha))*t*np.sin(alpha)
+    else:
+        sys.exit("Species type invalid. \n Please check input file and ensure the first element of the specs array is properly set. \n Should be either oxidizer or fuel.")
+    return Astar1-Astar2
