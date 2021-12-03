@@ -14,7 +14,7 @@ setup(
     setup_requires=setups,
     install_requires=['numpy','scipy'],
     # *strongly* suggested for sharing
-    version='0.6',
+    version='0.7',
     # The license can be anything you like
     #license='MIT',
     description='A package containing various functions in compressible flow',
