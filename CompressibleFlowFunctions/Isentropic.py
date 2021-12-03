@@ -17,7 +17,7 @@ def area_from_mass(Po,To,Rs,gamma,mdot):
     gamma    : Ratio of specific heats
     mdot     : Mass flow rate, kg/s
     '''
-    Gstar = Po*np.sqrt(gamma/Rs/To)*((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1)))##We call Gstar the ratio mdot/Astar
+    Gstar = Po*np.sqrt(gamma/(Rs*To))*((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1)))##We call Gstar the ratio mdot/Astar
     Astar = mdot/Gstar
     return Astar
 
