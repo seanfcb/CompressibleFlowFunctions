@@ -86,9 +86,8 @@ def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
     def delmass(A,M,mdot,Po,Rs,To,gamma):
         return delta_mass_stag(M,mdot,Po,Rs,To,gamma,A)
 
-    species = specs[0] #should be either fuel or oxidizer
-    dia     = specs[1] #Diameter used for choking calculations. Convert in to m
-    alpha   = specs[2] #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
+    dia     = specs[0] #Diameter used for choking calculations. Convert in to m
+    alpha   = specs[1] #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
     Astar1  = newton(delmass,0.001,args=(1,mdot,Po,Rs,To,gamma))
     Astar2  = np.pi*(dia+t*np.sin(alpha)*np.cos(alpha))*t
     print(Astar1)
