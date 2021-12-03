@@ -11,7 +11,7 @@ setup(
     # Needed to actually package something
     packages=['CompressibleFlowFunctions'],
     # Needed for dependencies
-    setup_requires=setups
+    setup_requires=setups,
     install_requires=['numpy','scipy'],
     # *strongly* suggested for sharing
     version='0.6',
