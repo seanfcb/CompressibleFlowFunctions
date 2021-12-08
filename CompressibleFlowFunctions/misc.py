@@ -88,7 +88,8 @@ def spacer_sizing(t,Po,To,Rs,mdot,gamma,specs):
 
     dia     = specs[0] #Diameter used for choking calculations. Convert in to m
     alpha   = specs[1] #Angle of the injection surface on the pintle ring. MKII Ph2 alpha = 30deg.
-    Astar1  = newton(delmass,0.001,args=(1,mdot,Po,Rs,To,gamma))
+    Astar1  = np.pi*(0.62*0.0254)**2/4
+    #Astar1  = newton(delmass,0.001,args=(1,mdot,Po,Rs,To,gamma))
     Astar2  = np.pi*(dia+t*np.sin(alpha)*np.cos(alpha))*t
     #print(Astar1)
     return Astar1-Astar2
