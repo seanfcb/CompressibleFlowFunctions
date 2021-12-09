@@ -45,7 +45,8 @@ def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the de
     if P_bval > 2*P1:
         P_bval = flowrates_choked(Cv,SG,Q)
     M_bval  = bisect(delta_mass_static,0.0000001,0.99999999,args=(mdot,P_bval*101325/14.7,Rs,To,gamma,Apipe))
-    Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
+    #Po_bval = P_bval/(1+((gamma-1)/2)*M_bval**2)**(-(gamma)/(gamma-1))
+    Po_bval = po_from_pratio(P_bval,gamma,M_bval)
     return P_bval, Po_bval, M_bval
 
 # def valve_losses_backwards(P2,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the Swagelok equation
