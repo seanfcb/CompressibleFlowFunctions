@@ -7,35 +7,6 @@ from CompressibleFlowFunctions.NSW import *
 from CompressibleFlowFunctions.misc import *
 
 
-# def area_from_mass(Po,To,Rs,gamma,mdot):
-#     '''
-#     Function calculates the choking area using the compressible area ratio
-#     Expected inputs:
-#     Po       : Stagnation pressure, Pa
-#     To       : Stagnation temperature, K
-#     Rs       : Specific gas constant, J/kgK (double check units)
-#     gamma    : Ratio of specific heats
-#     mdot     : Mass flow rate, kg/s
-#     '''
-#     Astar = mdot/(Po*np.sqrt(gamma/(Rs*To))*((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1))))##We call Gstar the ratio mdot/Astar
-#     return Astar
-#
-# def mass_from_area(M,Po,To,Rs,gamma,Area):
-#     '''
-#     Function calculates the mass flow rate using the compressible area ratio
-#     Expected inputs:
-#     M        : Mach number
-#     Po       : Stagnation pressure, Pa
-#     To       : Stagnation temperature, K
-#     Rs       : Specific gas constant, J/kgK (double check units)
-#     gamma    : Ratio of specific heats
-#     Area     : Pipe area, sq. m
-#     '''
-#     #Astar = np.pi*Dpipe*Dpipe/4
-#     #Gstar = Po*np.sqrt(gamma/Rs/To)*((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1)))##We call Gstar the ratio mdot/Astar
-#     Gstar = Po*np.sqrt(gamma/Rs/To)*M*(1+(gamma-2)/2*M*M)**(-(gamma+1)/(2*(gamma-1)))##We call Gstar the ratio mdot/Astar
-#     mdot  = Gstar*Area
-#     return mdot
 
 def astar_all_else_known(Dpipe,M,gamma):
     '''
@@ -206,3 +177,38 @@ def delta_mass_stag(M,mdot,Po,Rs,To,gamma,A):
     A        : Cross-sectional area of the pipe in sq. m
     '''
     return mdot/1000 - A*Po*np.sqrt(gamma/(Rs*To))*M*(1+(gamma-1)/2*M*M)**((-(gamma+1))/(2*(gamma-1)))
+
+##==================================================================##
+## Functions removed from library
+##==================================================================##
+
+
+# def area_from_mass(Po,To,Rs,gamma,mdot):
+#     '''
+#     Function calculates the choking area using the compressible area ratio
+#     Expected inputs:
+#     Po       : Stagnation pressure, Pa
+#     To       : Stagnation temperature, K
+#     Rs       : Specific gas constant, J/kgK (double check units)
+#     gamma    : Ratio of specific heats
+#     mdot     : Mass flow rate, kg/s
+#     '''
+#     Astar = mdot/(Po*np.sqrt(gamma/(Rs*To))*((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1))))##We call Gstar the ratio mdot/Astar
+#     return Astar
+#
+# def mass_from_area(M,Po,To,Rs,gamma,Area):
+#     '''
+#     Function calculates the mass flow rate using the compressible area ratio
+#     Expected inputs:
+#     M        : Mach number
+#     Po       : Stagnation pressure, Pa
+#     To       : Stagnation temperature, K
+#     Rs       : Specific gas constant, J/kgK (double check units)
+#     gamma    : Ratio of specific heats
+#     Area     : Pipe area, sq. m
+#     '''
+#     #Astar = np.pi*Dpipe*Dpipe/4
+#     #Gstar = Po*np.sqrt(gamma/Rs/To)*((gamma+1)/2)**(-(gamma+1)/(2*(gamma-1)))##We call Gstar the ratio mdot/Astar
+#     Gstar = Po*np.sqrt(gamma/Rs/To)*M*(1+(gamma-2)/2*M*M)**(-(gamma+1)/(2*(gamma-1)))##We call Gstar the ratio mdot/Astar
+#     mdot  = Gstar*Area
+#     return mdot
