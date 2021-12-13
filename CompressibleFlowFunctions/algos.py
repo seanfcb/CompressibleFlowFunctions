@@ -68,15 +68,6 @@ def valve_losses_backwards(P1,Cv,SG,Q,mdot,Rs,To,gamma,Apipe): ##Based on the de
 #     return P_bval#, Po_bval, M_bval
 
 
-def fanning_and_reynolds(Po1,To,gamma,M,Rs,Dpipe,mu,epsilon):
-    P1         = p_from_pratio(Po1,gamma,M)
-    T1         = T_from_Tratio(To,gamma,M)
-    rhoi       = P1*(101325/14.7)/(T1*Rs)
-    Re         = rhoi*M*np.sqrt(gamma*Rs*T1)*Dpipe/mu
-    darcy      = bisect(colebrook_white,1e-6,1,args=(Re,Dpipe,epsilon))
-    fanning    = darcy/4
-
-    return fanning, Re
 
 def fanno_losses(mdot,Rs,SG,Dpipe,Apipe,Po1,Po1_metric,To,gamma,mu,epsilon,L):
     ##==================================================================##

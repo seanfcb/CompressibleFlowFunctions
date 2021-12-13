@@ -33,6 +33,18 @@ def flowrates(P2,P1,Cv,SG,Q):
 #     delP = P1-P2
 #     return Q - conv*Cv*(1-(2/3)*delP/P1)*np.sqrt(delP/(P1*SG*T1))
 
+
+def fanning_and_reynolds(Po1,To,gamma,M,Rs,Dpipe,mu,epsilon):
+    P1         = p_from_pratio(Po1,gamma,M)
+    T1         = T_from_Tratio(To,gamma,M)
+    rhoi       = P1*(101325/14.7)/(T1*Rs)
+    Re         = rhoi*M*np.sqrt(gamma*Rs*T1)*Dpipe/mu
+    darcy      = bisect(colebrook_white,1e-6,1,args=(Re,Dpipe,epsilon))
+    fanning    = darcy/4
+
+    return fanning, Re
+
+
 def flowrates_choked(Cv,SG,Q):
     '''
     Calculates the static pressure drop through a flow device rated by Cv
