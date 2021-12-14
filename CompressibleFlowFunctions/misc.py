@@ -1,10 +1,10 @@
 import numpy as np
 import sys
 from scipy.optimize import *
-from CompressibleFlowFunctions.algos import *
 from CompressibleFlowFunctions.Isentropic import *
 from CompressibleFlowFunctions.Fanno import *
 from CompressibleFlowFunctions.NSW import *
+from CoolProp.CoolProp import PropsSI
 
 def flowrates(P2,P1,Cv,SG,Q):
     '''
@@ -34,10 +34,15 @@ def flowrates(P2,P1,Cv,SG,Q):
 #     return Q - conv*Cv*(1-(2/3)*delP/P1)*np.sqrt(delP/(P1*SG*T1))
 
 
-def fanning_and_reynolds(Po1,To,gamma,M,Rs,Dpipe,mu,epsilon):
+def fanning_and_reynolds(Po1,To,gamma,M,Rs,Dpipe,mu,epsilon,fluid):
     P1         = p_from_pratio(Po1,gamma,M)
     T1         = T_from_Tratio(To,gamma,M)
     rhoi       = P1*(101325/14.7)/(T1*Rs)
+    if fluid == 'oxygen':
+        mu = PropsSI('viscosity','T',T1,'P',P1*101.325/14.7,fluid)
+    elif fluid == 'hydrogen':
+        mu = PropsSI('viscosity','T',T1,'P',P1*101.325/14.7,fluid)
+
     Re         = rhoi*M*np.sqrt(gamma*Rs*T1)*Dpipe/mu
     darcy      = bisect(colebrook_white,1e-6,1,args=(Re,Dpipe,epsilon))
     fanning    = darcy/4
