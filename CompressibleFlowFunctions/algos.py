@@ -25,7 +25,7 @@ def fanno_losses_backwards(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,L): #function to 
     L        : Pipe length, meters
     '''
     PHI2           = fanno_equation(M2,gamma)
-    f, Re          = fanning_and_reynolds(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon)
+    f, Re          = fanning_and_reynolds(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,fluid)
     Lstar2         = Lstar_fanno(f,Dpipe,M2,gamma)
     fanno_constant = 4*f*L/Dpipe
     PHI1           = fanno_constant + PHI2
