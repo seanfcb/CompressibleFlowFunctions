@@ -10,7 +10,7 @@ from CompressibleFlowFunctions.misc import *
 ###All functions take as an input: pressure in PSI, Temperature in Kelvin, Pipe diameters in inches
 ###All functions output answers in SI units
 
-def fanno_losses_backwards(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,L): #function to be added to CompressibleFlowFunctions.py
+def fanno_losses_backwards(Po2,To,gamma,M2,Rs,Dpipe,mu,epsilon,L,fluid): #function to be added to CompressibleFlowFunctions.py
     '''
     Function calculates initial conditions in a friction pipe knowing the exit conditions
     Expected inputs:
