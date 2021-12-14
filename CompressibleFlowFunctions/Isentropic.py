@@ -1,11 +1,6 @@
 import numpy as np
 import sys
 from scipy.optimize import *
-from CompressibleFlowFunctions.algos import *
-from CompressibleFlowFunctions.Fanno import *
-from CompressibleFlowFunctions.NSW import *
-from CompressibleFlowFunctions.misc import *
-
 
 
 def astar_all_else_known(Dpipe,M,gamma):
@@ -122,7 +117,6 @@ def p_from_pratio(Po,gamma,M):
     P_static = Po*(1+((gamma-1)/2)*M**2)**(-(gamma)/(gamma-1))
     return P_static
 
-
 def T_from_Tratio(To,gamma,M):
     '''
     Function calculates the static pressure knowing the gas properties, Mach number, and stagnation pressure using the isentropic pressure ratio equation P/Po
@@ -144,7 +138,6 @@ def To_from_Tratio(To,gamma,M):
 
     '''
     return T*(1+((gamma-1)/2)*M**2)
-
 
 def mach_from_Tratio(M,To,T1,gamma):
     return T_from_Tratio(To,gamma,M)-T1
