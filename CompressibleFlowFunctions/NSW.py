@@ -1,10 +1,6 @@
 import numpy as np
 import sys
 from scipy.optimize import *
-from CompressibleFlowFunctions.algos import *
-from CompressibleFlowFunctions.Isentropic import *
-from CompressibleFlowFunctions.Fanno import *
-from CompressibleFlowFunctions.misc import *
 
 def prat_from_mach(gamma,M):
     '''
