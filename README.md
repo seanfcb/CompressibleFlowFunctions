@@ -26,6 +26,10 @@ pip install -e .
 
 ```python
 from CompressibleFlowFunctions.Isentropic import *
+from CompressibleFlowFunctions.NSW import *
+from CompressibleFlowFunctions.Fanno import *
+from CompressibleFlowFunctions.Expansion import *
+from CompressibleFlowFunctions.misc import *
 ```
 
 ## GUI
