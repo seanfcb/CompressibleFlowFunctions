@@ -5,7 +5,7 @@ from scipy.optimize import *
 
 def colebrook_white(f,Re,D,epsilon):
     '''
-    Subtracts both sides of the Colebrook-White equation to calculate the Darcy friction factor.
+    Subtracts both sides of the Colebrook-White equation to calculate the Darcy friction factor by iteration.
     Divide the result by 4 for the Fanning friction factor.
     Expected inputs:
     f       : Darcy friction factor
@@ -16,6 +16,11 @@ def colebrook_white(f,Re,D,epsilon):
     return 1/np.sqrt(f) - (-2)*np.log10(epsilon/(3.7*D) + 2.51/(Re*np.sqrt(f)))
 
 def fanno_equation(M,gamma):
+    '''
+    Function calculates the Fanno equation.
+    M       : Mach number
+    gamma   : Ratio of specific heats
+    '''
     return ((1-M**2)/(gamma*M**2) + (gamma+1)/(2*gamma)*np.log(((gamma+1)*M**2)/(2*(1+(gamma-1)/2*M**2))))
 
 def delta_fanno(M,L,f,D,gamma):
@@ -55,4 +60,10 @@ def mach_fanno(L,f,D,gamma): #Define the Fanno equation to iterate on
     return M
 
 def fanno_po_ratio(M,gamma):
+    '''
+    Calculates the Fanno stagnation pressure ratio 
+    M       : Mach number
+    gamma   : Ratio of specific heats
+    '''
+
     return (1/M)*((2+(gamma-1)*M**2)/(gamma+1))**((gamma+1)/(2*(gamma-1)))

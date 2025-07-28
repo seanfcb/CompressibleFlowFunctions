@@ -49,7 +49,7 @@ class FlowFunctionGUI(tk.Tk):
         module = self.module_var.get()
         func_dict = {
             "Isentropic": [
-                "throat_area_from_mdot", "astar_all_else_known", "mach_from_G",
+                "mdot_from_throat_area", "throat_area_from_mdot", "astar_all_else_known", "mach_from_G",
                 "mach_from_aratio", "aratio_from_mach", "po_from_pratio",
                 "p_from_pratio", "T_from_Tratio", "To_from_Tratio", "delta_mass_static"
             ],
@@ -79,6 +79,7 @@ class FlowFunctionGUI(tk.Tk):
         # Argument units dictionary
         arg_units = {
             "mdot": "kg/s",
+            "A_throat": "m²",
             "Po": "Pa",
             "Rs": "J/kg·K",
             "To": "K",
@@ -111,6 +112,7 @@ class FlowFunctionGUI(tk.Tk):
         }
         # Function descriptions
         func_descriptions = {
+            "mdot_from_throat_area": "Calculates mass flow rate from choked area and stagnation conditions.",
             "throat_area_from_mdot": "Calculates the minimum (choked) area required for a given mass flow and stagnation conditions.",
             "astar_all_else_known": "Calculates choking area and diameter from area ratio and Mach number.",
             "mach_from_G": "Finds Mach number from flow properties; resolves subsonic/supersonic branch.",
@@ -146,6 +148,7 @@ class FlowFunctionGUI(tk.Tk):
             "hole_numbers": "Calculates the number of injector holes given choking area and drill diameter."
         }
         arg_lists = {
+            "mdot_from_throat_area": ["A_throat", "Po", "Rs", "To", "gamma"],
             "throat_area_from_mdot": ["mdot", "Po", "Rs", "To", "gamma"],
             "astar_all_else_known": ["Apipe", "M", "gamma"],
             "mach_from_G": ["Po", "Rs", "To", "gamma", "mdot", "Apipe", "subsuper"],

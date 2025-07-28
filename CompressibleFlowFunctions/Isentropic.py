@@ -2,6 +2,41 @@ import numpy as np
 import sys
 from scipy.optimize import *
 
+def mdot_from_throat_area(A_throat, Po, Rs, To, gamma):
+    '''
+    Solves for mass flow rate (mdot) given choked area and stagnation properties.
+    Expected inputs:
+    A_throat : Choked area, m²
+    Po       : Stagnation pressure, Pa
+    Rs       : Specific gas constant, J/kgK
+    To       : Stagnation temperature, K
+    gamma    : Ratio of specific heats
+
+    Returns: mdot
+    '''
+    term1 = A_throat * Po
+    term2 = np.sqrt(gamma / (Rs * To))
+    term3 = (2 / (gamma + 1)) ** ((gamma + 1) / (2 * (gamma - 1)))
+    mdot = term1 * term2 * term3
+    return mdot
+
+def throat_area_from_mdot(mdot, Po, Rs, To, gamma):
+    '''
+    Using the mdot over astar equation for choked flow, calculate choke area knowing all other properties.
+    Expected inputs:
+    mdot     : Mass flow rate, kg/s
+    Po       : Stagnation pressure, Pa
+    Rs       : Specific gas constant, J/kgK
+    To       : Stagnation temperature, K
+    gamma    : Ratio of specific heats
+
+    Returns: A_throat
+    '''
+    term1 = mdot / Po
+    term2 = np.sqrt(Rs * To / gamma)
+    term3 = (2 / (gamma + 1)) ** (-(gamma + 1) / (2 * (gamma - 1)))
+    A_throat = term1 * term2 * term3
+    return A_throat
 
 def astar_all_else_known(Apipe,M,gamma):
     '''
@@ -21,7 +56,7 @@ def astar_all_else_known(Apipe,M,gamma):
 
 
 
-def mach_from_G(Po,Rs,To,gamma,mdot,Dpipe,subsuper):
+def mach_from_G(Po,Rs,To,gamma,mdot,Apipe,subsuper):
     '''
     Calculates the Mach number knowing all other flow properties. This function allows the user to specify whether to resolve to the subsonic or supersonic branch
     Expected inputs:
@@ -30,12 +65,12 @@ def mach_from_G(Po,Rs,To,gamma,mdot,Dpipe,subsuper):
     To       : Stagnation temperature, K
     gamma    : Ratio of specific heats
     mdot     : Mass flow rate, kg/s
-    Dpipe    : Diameter of pipe, meters
+    Apipe    : Cross-sectional area of pipe, sq. meters
     subsuper : Specify either 'subsonic' or 'supersonic'
 
     Returns: M
     '''
-    Apipe = np.pi*Dpipe*Dpipe/4
+
     def delta_G(M,Po,Rs,To,gamma,mdot,Apipe):
         return mdot/Apipe - Po*np.sqrt(gamma/Rs/To)*M*(1+(gamma-2)/2*M*M)**(-(gamma+1)/(2*(gamma-1)))
     if subsuper == 'subsonic':
@@ -156,21 +191,4 @@ def delta_mass_static(M,mdot,P,Rs,To,gamma,A):
 
     return mdot - P*(1+(gamma-1)/2*M*M)**(gamma/(gamma-1))*A*np.sqrt(gamma/(Rs*To))*M*(1+(gamma-1)/2*M*M)**(-(gamma+1)/(2*(gamma-1)))
 
-def delta_mass_stag(mdot,Po,Rs,To,gamma):
-    '''
-    Using the mdot over astar equation for choked flow, provides an equation to iterate on knowing all other parameters.
-    Expected inputs:
-    M        : Mach number of the flow
-    mdot     : Mass flow rate, kg/s
-    Po       : Stagnation pressure, Pa
-    Rs       : Specific gas constant, J/kgK (double check units)
-    To       : Stagnation temperature, K
-    gamma    : Ratio of specific heats
-    A        : Cross-sectional area of the pipe in sq. m
-    '''
-    term1 = mdot/Po
-    term2 = np.sqrt(To*Rs/gamma)
-    term3 = (gamma+1)/2
-    expo  = -(gamma+1)/(2*(gamma-1))
-    A_solution = term1*term2*term3**expo
-    return A_solution
+

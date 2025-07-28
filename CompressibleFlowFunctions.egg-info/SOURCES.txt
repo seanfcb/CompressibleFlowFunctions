@@ -6,6 +6,7 @@ CompressibleFlowFunctions/Isentropic.py
 CompressibleFlowFunctions/NSW.py
 CompressibleFlowFunctions/__init__.py
 CompressibleFlowFunctions/algos.py
+CompressibleFlowFunctions/geometry.py
 CompressibleFlowFunctions/misc.py
 CompressibleFlowFunctions.egg-info/PKG-INFO
 CompressibleFlowFunctions.egg-info/SOURCES.txt

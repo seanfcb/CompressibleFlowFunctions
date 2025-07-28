@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: CompressibleFlowFunctions
-Version: 0.8
+Version: 0.81
 Summary: A package containing various functions in compressible flow
 Author: Sean Connolly-Boutin
 Requires-Dist: numpy
